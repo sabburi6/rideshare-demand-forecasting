@@ -8,7 +8,7 @@ Bike-sharing systems need to predict hourly demand accurately to prevent empty o
 
 ## Dataset
 
-**Capital Bikeshare (2011–2012)** — 17,379 hourly records with 17 features including season, hour of day, weather condition, temperature, humidity, windspeed, holiday/working day status, and rental counts (casual + registered users).
+**Capital Bikeshare (2011–2012)** - 17,379 hourly records with 17 features including season, hour of day, weather condition, temperature, humidity, windspeed, holiday/working day status, and rental counts (casual + registered users).
 
 Source: [Capital Bikeshare System Data](https://www.capitalbikeshare.com/system-data)
 
@@ -16,7 +16,7 @@ Source: [Capital Bikeshare System Data](https://www.capitalbikeshare.com/system-
 
 **Exploratory Analysis** revealed strong temporal and weather-driven patterns: demand peaks at 8 AM and 5-6 PM (commuter hours), summer and autumn see highest usage, and clear weather drives significantly more rentals than rain or snow. A custom binary feature `is_peak_hour` was engineered to capture rush hour commuting windows (7-9 AM, 4-7 PM). The target variable was log-transformed (`log1p`) to reduce right skewness.
 
-**Modeling** followed an incremental approach — starting with a Linear Regression baseline, then progressing to ensemble methods. All models used a time-aware 80/20 train-test split (chronological, not random) to prevent temporal leakage, with 5-fold cross-validation for generalizability. Hyperparameters for XGBoost and Gradient Boosting were tuned using RandomizedSearchCV.
+**Modeling** followed an incremental approach, starting with a Linear Regression baseline, then progressing to ensemble methods. All models used a time-aware 80/20 train-test split (chronological, not random) to prevent temporal leakage, with 5-fold cross-validation for generalizability. Hyperparameters for XGBoost and Gradient Boosting were tuned using RandomizedSearchCV.
 
 **Interpretability** was addressed using SHAP values, which confirmed hour of day, temperature, and working day status as the dominant predictors across both XGBoost and Random Forest models.
 
@@ -33,7 +33,7 @@ The tuned Gradient Boosting model achieved the best performance, explaining 85.8
 
 **Key findings from SHAP analysis:**
 - Hour of day is by far the most influential feature (commuter pattern)
-- Temperature has a non-linear effect — demand peaks at moderate temperatures (0.6–0.8 normalized) and drops at extremes
+- Temperature has a non-linear effect, demand peaks at moderate temperatures (0.6–0.8 normalized) and drops at extremes
 - Working day status creates distinct demand shapes (commuter peaks on weekdays vs. midday peaks on weekends)
 
 ## Tech Stack
